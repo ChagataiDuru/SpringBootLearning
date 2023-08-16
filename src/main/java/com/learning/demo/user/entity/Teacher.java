@@ -4,21 +4,21 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-@Entity(name = "Student")
+@Entity(name = "Teacher")
 @Data
-@Table(name = "student")
+@Table(name = "teacher")
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Student extends User {
+public class Teacher extends User {
 
-    @Column(name = "studentid")
-    String studentid;
+    @Column(name = "orgId")
+    int orgId;
 
-    public Student(String firstName, String lastName, String mail,String studentid) {
+    public Teacher(String firstName, String lastName, String mail,int orgId) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = mail;
-        this.studentid = studentid;
+        this.orgId = orgId;
     }
 }
