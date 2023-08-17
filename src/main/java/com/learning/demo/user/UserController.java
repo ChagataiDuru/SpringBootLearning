@@ -6,21 +6,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("users")
 public class UserController {
-
     private final UserRepository repository;
     public UserController(UserRepository repository) {
         this.repository = repository;
     }
     @GetMapping
-    public Stream<User> findAll(@RequestParam(value = "page", defaultValue = "0") int page) {
+    public List<User> findAll(@RequestParam(value = "page", defaultValue = "0") int page) {
         int SIZE = 10;
-        Page<User> user = this.repository.findAll(PageRequest.of(page, SIZE, Sort.by("first_name", "id")));
-        return user.get();
+        return this.repository.findAll(PageRequest.of(page, SIZE, Sort.by("first_name", "id")));
     }
     @GetMapping("{id}")
     public User findById(@PathVariable int id) {

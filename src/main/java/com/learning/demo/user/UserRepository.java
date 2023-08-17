@@ -3,10 +3,11 @@ package com.learning.demo.user;
 import com.learning.demo.user.entity.User;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class UserRepository implements UserDAO{
@@ -39,9 +40,9 @@ public class UserRepository implements UserDAO{
     }
 
     @Override
-    public Page<User> findAll(PageRequest of) {
-        return entityManager.createQuery("SELECT u FROM User u", User.class)
-                .setFirstResult(of.getOffset())
+    public List<User> findAll(PageRequest of) {
+        return this.entityManager.createQuery("SELECT u FROM User u", User.class)
+                .setFirstResult(of.getPageNumber() * of.getPageSize())
                 .setMaxResults(of.getPageSize())
                 .getResultList();
     }
@@ -49,6 +50,6 @@ public class UserRepository implements UserDAO{
     @Override
     @Transactional
     public User update(User user) {
-
+        return null;
     }
 }
