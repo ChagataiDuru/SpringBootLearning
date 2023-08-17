@@ -1,6 +1,8 @@
 package com.learning.demo;
 
 import com.learning.demo.user.UserDAO;
+import com.learning.demo.user.UserRepository;
+import com.learning.demo.user.entity.Manager;
 import com.learning.demo.user.entity.Student;
 import com.learning.demo.user.entity.Teacher;
 import com.learning.demo.user.entity.User;
@@ -24,17 +26,29 @@ public class DemoApplication {
 	}
 
 	private void createStudent(UserDAO userDAO) {
-		System.out.println("Creating new Student Object");
-		User tempStudent = new Student("Deneme","Soyad","student2@ozu.edu.tr","S029021");
-		User temp2Student = new Student("Deneme","Soyad","student2@ozu.edu.tr","S029021");
-		User temp3Student = new Teacher("Hoca","Test","hoca@ozu.edu.tr",246104);
 
-		System.out.println("Saving Student...");
-		userDAO.save(tempStudent);
-		userDAO.save(temp2Student);
-		userDAO.save(temp3Student);
+		for(int i = 0; i < 5;i++){
+			System.out.println("Creating new Student Object");
+			User tempUser = new Student("Student"+Integer.toString(i),"A"+Integer.toString(i),"student@ozu.edu.tr","S029021");
+			System.out.println("Saving Student...");
+			userDAO.save(tempUser);
+			System.out.println("Student with id" + tempUser.getId() + " saved");
+		}
+		for(int i = 0; i < 5;i++){
+			System.out.println("Creating new Teacher Object");
+			User tempUser = new Teacher("Teacher"+Integer.toString(i),"B"+Integer.toString(i),"student@ozu.edu.tr",34011);
+			System.out.println("Saving Teacher...");
+			userDAO.save(tempUser);
+			System.out.println("Teacher with id" + tempUser.getId() + " saved");
+		}
+		for(int i = 0; i < 5;i++){
+			System.out.println("Creating new Manager Object");
+			User tempUser = new Manager("Manager"+Integer.toString(i),"C"+Integer.toString(i),"student@ozu.edu.tr",246105);
+			System.out.println("Saving Manager...");
+			userDAO.save(tempUser);
+			System.out.println("Manager with id" + tempUser.getId() + " saved");
+		}
 
-		System.out.println("Student with id" + tempStudent.getId() + " saved");
 	}
 
 }
