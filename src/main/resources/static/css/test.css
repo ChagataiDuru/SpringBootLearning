@@ -1,0 +1,67 @@
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Upper bar */
+.upper-bar {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: right;
+}
+
+/* Student selection */
+.student-selection {
+    margin-top: 30px;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.student-selection h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.student-selection select {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+/* Selected students */
+.selected-students {
+    margin-top: 30px;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.selected-students h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.selected-students ul {
+    list-style: none;
+    padding: 0;
+}
+
+.selected-students li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Clear floating elements */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}

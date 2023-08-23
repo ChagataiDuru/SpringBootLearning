@@ -1,11 +1,49 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <title>Landing Page</title>
+    <link rel="stylesheet" th:href="@{/css/test.css}">
 </head>
 <body>
-    <p th:text="'Time on the server is ' + ${theDate}"/>
+<!-- Upper bar with logged user's name -->
+<div class="upper-bar">
+    <p>Welcome, <span th:text="${userName}">Guest</span>!</p>
+    <p>Date, <span th:text="${theDate}"></span>!</p>
+</div>
+
+<!-- Container for selecting students -->
+<div class="student-selection">
+    <h2>Select Students</h2>
+    <select id="student-select" multiple>
+        <option th:each="student : ${studentList}"
+                th:text="${student.firstName + ' ' + student.lastName + ' (' + student.email + ')'}"></option>
+    </select>
+</div>
+
+<!-- Container for selected students -->
+<div class="selected-students">
+    <h2>Selected Students</h2>
+    <ul id="selected-students-list"></ul>
+</div>
+
+<!-- JavaScript to manage selected students -->
+<script>
+    const studentSelect = document.getElementById('student-select');
+    const selectedStudentsList = document.getElementById('selected-students-list');
+
+    studentSelect.addEventListener('change', function() {
+        selectedStudentsList.innerHTML = ''; // Clear existing selection
+
+        const selectedOptions = Array.from(studentSelect.selectedOptions);
+        selectedOptions.forEach(option => {
+            const listItem = document.createElement('li');
+            listItem.textContent = option.textContent;
+            selectedStudentsList.appendChild(listItem);
+        });
+    });
+</script>
 </body>
 </html>
+
+
