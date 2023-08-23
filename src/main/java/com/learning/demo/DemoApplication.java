@@ -1,11 +1,11 @@
 package com.learning.demo;
 
+import com.learning.demo.academic.dao.ICourseRepository;
+import com.learning.demo.academic.service.CourseService;
+import com.learning.demo.academic.service.ICourseService;
 import com.learning.demo.user.UserDAO;
-import com.learning.demo.user.UserRepository;
-import com.learning.demo.user.entity.Manager;
-import com.learning.demo.user.entity.Student;
-import com.learning.demo.user.entity.Teacher;
-import com.learning.demo.user.entity.User;
+import com.learning.demo.user.entity.*;
+import com.learning.demo.academic.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,13 +19,13 @@ public class DemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(UserDAO userDAO){
+	public CommandLineRunner commandLineRunner(UserDAO userDAO,ICourseRepository iCourseRepository){
 		return runner -> {
-			createStudent(userDAO);
+			createThings(userDAO,iCourseRepository);
 		};
 	}
 
-	private void createStudent(UserDAO userDAO) {
+	private void createThings(UserDAO userDAO,ICourseRepository iCourseRepository) {
 
 		for(int i = 0; i < 5;i++){
 			System.out.println("Creating new Student Object");
@@ -36,14 +36,18 @@ public class DemoApplication {
 		}
 		for(int i = 0; i < 5;i++){
 			System.out.println("Creating new Teacher Object");
-			User tempUser = new Teacher("Teacher"+Integer.toString(i),"B"+Integer.toString(i),"student@ozu.edu.tr",34011);
+			User tempUser = new Teacher("Teacher"+Integer.toString(i),"B"+Integer.toString(i),"instructor@ozyegin.edu.tr",34011);
 			System.out.println("Saving Teacher...");
 			userDAO.save(tempUser);
 			System.out.println("Teacher with id" + tempUser.getId() + " saved");
+			System.out.println("Creating new Course Object");
+			Course tempCourse = new Course("Course"+i,tempUser);
+			System.out.println("Saving Course...");
+			iCourseRepository.save(tempCourse);
 		}
 		for(int i = 0; i < 5;i++){
 			System.out.println("Creating new Manager Object");
-			User tempUser = new Manager("Manager"+Integer.toString(i),"C"+Integer.toString(i),"student@ozu.edu.tr",246105);
+			User tempUser = new Manager("Manager"+Integer.toString(i),"C"+Integer.toString(i),"manager@ozyegin.edu.tr",246105);
 			System.out.println("Saving Manager...");
 			userDAO.save(tempUser);
 			System.out.println("Manager with id" + tempUser.getId() + " saved");

@@ -20,9 +20,9 @@ public class UserRepository implements UserDAO{
 
     @Override
     @Transactional
-    public User save(User student){
-        entityManager.persist(student);
-        return student;
+    public User save(User user){
+        entityManager.persist(user);
+        return user;
     }
 
     @Override

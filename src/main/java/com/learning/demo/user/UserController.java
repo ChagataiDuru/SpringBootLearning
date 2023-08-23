@@ -1,10 +1,12 @@
 package com.learning.demo.user;
 
 import com.learning.demo.user.entity.User;
+import org.apache.coyote.Response;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -26,8 +28,9 @@ public class UserController {
         return this.repository.findById(id); //.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
     @PostMapping
-    public User insert(@RequestBody User user) {
-        return this.repository.save(user);
+    public ResponseEntity<User> createUser(@RequestBody User body) {
+        User user = this.repository.save(body);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
     @PutMapping("{id}")
     public User update(@PathVariable int id, @RequestBody User user) {
@@ -38,6 +41,14 @@ public class UserController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
         this.repository.deleteById(id);
+    }
+
+    @GetMapping("/hello")
+    public String sayHello(Model model){
+
+        model.addAttribute("theDate",new java.util.Date());
+
+        return "helloworld";
     }
 
 }

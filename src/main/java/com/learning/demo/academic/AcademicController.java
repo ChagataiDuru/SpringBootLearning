@@ -2,17 +2,10 @@ package com.learning.demo.academic;
 
 
 import com.learning.demo.academic.entity.Course;
-import com.learning.demo.academic.repository.CourseRepository;
-import com.learning.demo.user.UserDAO;
-import com.learning.demo.user.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.learning.demo.academic.service.CourseService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,16 +14,26 @@ import java.util.List;
 @RequestMapping(name = "courses")
 public class AcademicController {
 
-    private final CourseRepository courseRepository;
+    private final CourseService courseService;
 
-    public AcademicController(CourseRepository courseRepository){this.courseRepository = courseRepository;}
+    public AcademicController(CourseService courseService){this.courseService = courseService;}
 
     @GetMapping
     public List<Course> findAllCourses(@RequestParam(value = "page", defaultValue = "0") int page) {
         int SIZE = 10;
-        return this.courseRepository.findAll(PageRequest.of(page, SIZE, Sort.by("first_name", "id")));
+        return this.courseService.findAll();
     }
 
-    
+    @GetMapping("{id}")
+    public Course findById(@PathVariable int id){
+        return this.courseService.findById(id);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteById(@PathVariable int id){
+        this.courseService.deleteById(id);
+    }
+
+
 
 }

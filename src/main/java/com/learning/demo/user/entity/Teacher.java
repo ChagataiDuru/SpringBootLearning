@@ -1,5 +1,6 @@
 package com.learning.demo.user.entity;
 
+import com.learning.demo.academic.entity.Course;
 import jakarta.persistence.*;
 import lombok.*;
 

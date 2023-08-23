@@ -1,14 +1,14 @@
 package com.learning.demo.academic.entity;
 
 import com.learning.demo.user.entity.Teacher;
+import com.learning.demo.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Data
-@Table(name = "lesson")
+@Table(name = "course")
 @NoArgsConstructor
-@AllArgsConstructor
 public class Course {
 
     @Id
@@ -17,11 +17,16 @@ public class Course {
     private Long id;
 
     @Column
-    private String lessonsName;
+    private String courseName;
 
-    @Column
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "instructor_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "instructor_id", nullable = false)
     private Teacher instructor;
+
+
+    public Course(String courseName,User instructor) {
+        this.courseName = courseName;
+        this.instructor = (Teacher) instructor;
+    }
 
 }
