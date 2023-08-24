@@ -21,7 +21,6 @@ public abstract class User {
     String firstName;
 
     @Column(name = "last_name")
-    @Getter(AccessLevel.NONE)
     String lastName;
 
     @Column(name = "email")

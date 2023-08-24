@@ -2,8 +2,8 @@ package com.learning.demo.user;
 
 import com.learning.demo.user.entity.User;
 import jakarta.persistence.EntityManager;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,11 +40,17 @@ public class UserRepository implements UserDAO{
     }
 
     @Override
-    public List<User> findAll(PageRequest of) {
-        return this.entityManager.createQuery("SELECT u FROM User u", User.class)
-                .setFirstResult(of.getPageNumber() * of.getPageSize())
-                .setMaxResults(of.getPageSize())
-                .getResultList();
+    public List<User> findAll() {
+        return (List<User>) this.entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
+    }
+
+    @Override
+    public List<User> findStudentsWithOzuEmail() {
+        String emailKeyword = "@ozu.edu.tr";
+        String hql = "FROM User u WHERE u.email LIKE :emailKeyword";
+        Query<User> query = (Query<User>) this.entityManager.createQuery(hql, User.class);
+        query.setParameter("emailKeyword", "%" + emailKeyword + "%");
+        return query.getResultList();
     }
 
     @Override

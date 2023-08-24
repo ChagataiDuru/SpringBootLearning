@@ -10,6 +10,7 @@ public interface UserDAO {
     User save(User student);
     User findById(int id);
     void deleteById(int id);
-    List<User> findAll(PageRequest of);
+    List<User> findAll();
+    List<User> findStudentsWithOzuEmail();
     User update(User user);
 }

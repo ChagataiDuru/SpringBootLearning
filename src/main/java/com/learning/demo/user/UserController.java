@@ -21,7 +21,7 @@ public class UserController {
     @GetMapping
     public List<User> findAll(@RequestParam(value = "page", defaultValue = "0") int page) {
         int SIZE = 10;
-        return this.repository.findAll(PageRequest.of(page, SIZE, Sort.by("first_name", "id")));
+        return this.repository.findAll();
     }
     @GetMapping("{id}")
     public User findById(@PathVariable int id) {
@@ -41,14 +41,6 @@ public class UserController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
         this.repository.deleteById(id);
-    }
-
-    @GetMapping("/hello")
-    public String sayHello(Model model){
-
-        model.addAttribute("theDate",new java.util.Date());
-
-        return "helloworld";
     }
 
 }

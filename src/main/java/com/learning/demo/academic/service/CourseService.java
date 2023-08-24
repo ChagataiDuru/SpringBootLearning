@@ -2,6 +2,7 @@ package com.learning.demo.academic.service;
 
 import com.learning.demo.academic.dao.ICourseRepository;
 import com.learning.demo.academic.entity.Course;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class CourseService implements ICourseService {
 
     private final ICourseRepository courseRepository;
 
+    @Autowired
     public CourseService(ICourseRepository courseRepository){
         this.courseRepository = courseRepository;
     }
