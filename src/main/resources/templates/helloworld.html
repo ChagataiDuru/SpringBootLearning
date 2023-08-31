@@ -1,39 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <title>Landing Page</title>
-    <link rel="stylesheet" th:href="@{/css/test.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<!-- Upper bar with logged user's name -->
 <div class="upper-bar">
-    <p>Welcome, <span th:text="${userName}">Guest</span>!</p>
+    <p>Welcome, <span sec:authentication="principal.username"></span>!</p>
+    <p>Roles:, <span sec:authentication="principal.authorities"></span>!</p>
     <p>Date, <span th:text="${theDate}"></span>!</p>
 </div>
 
-<!-- Container for selecting students -->
 <div class="student-selection">
     <h2>Select Students</h2>
     <select id="student-select" multiple>
         <option th:each="student : ${studentList}"
-                th:text="${student.firstName + ' ' + student.lastName + ' (' + student.email + ')'}"></option>
+                th:text="${student.firstName + ' ' + student.lastName + ' (' + student.email + ')'+ ' (' + student.studentid + ')'}"></option>
     </select>
 </div>
 
-<!-- Container for selected students -->
 <div class="selected-students">
     <h2>Selected Students</h2>
     <ul id="selected-students-list"></ul>
 </div>
 
-<!-- JavaScript to manage selected students -->
+<form action="#" th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout"/>
+</form>
+
 <script>
     const studentSelect = document.getElementById('student-select');
     const selectedStudentsList = document.getElementById('selected-students-list');
 
     studentSelect.addEventListener('change', function() {
-        selectedStudentsList.innerHTML = ''; // Clear existing selection
+        selectedStudentsList.innerHTML = '';
 
         const selectedOptions = Array.from(studentSelect.selectedOptions);
         selectedOptions.forEach(option => {

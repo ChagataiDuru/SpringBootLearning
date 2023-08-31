@@ -1,0 +1,129 @@
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Login box */
+.login-box {
+    text-align: center;
+}
+
+.login-box h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-icon img {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 40px 10px 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Clear floating elements */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Upper bar */
+.upper-bar {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: right;
+}
+
+/* Student selection */
+.student-selection {
+    margin-top: 30px;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.student-selection h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.student-selection select {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+/* Selected students */
+.selected-students {
+    margin-top: 30px;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.selected-students h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.selected-students ul {
+    list-style: none;
+    padding: 0;
+}
+
+.selected-students li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Clear floating elements */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.failed{
+    color: red;
+}

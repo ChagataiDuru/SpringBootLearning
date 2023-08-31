@@ -27,6 +27,7 @@ public class Student extends User {
         this.lastName = lastName;
         this.email = mail;
         this.studentid = studentid;
+        this.course = null;
     }
 
     public void setCourse(Course course) {

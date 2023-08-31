@@ -40,9 +40,10 @@ public class Course {
         this.instructor = (Teacher) instructor;
     }
 
-    public void setStudents(List<User> all) {
+/*    public void setStudents(List<User> all) {
         for(User u: all){
             this.students.add((Student) u);
+            ((Student)u).setCourse(this);
         }
-    }
+    }*/
 }

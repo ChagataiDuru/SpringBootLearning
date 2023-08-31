@@ -1,21 +1,18 @@
 package com.learning.demo.user;
 
 import com.learning.demo.user.entity.User;
-import org.apache.coyote.Response;
-import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("users")
 public class UserController {
-    private final UserRepository repository;
-    public UserController(UserRepository repository) {
+    private final IUserRepository repository;
+    public UserController(IUserRepository repository) {
         this.repository = repository;
     }
     @GetMapping
@@ -24,7 +21,7 @@ public class UserController {
         return this.repository.findAll();
     }
     @GetMapping("{id}")
-    public User findById(@PathVariable int id) {
+    public Optional<User> findById(@PathVariable int id) {
         return this.repository.findById(id); //.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
     @PostMapping
@@ -33,10 +30,9 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
     @PutMapping("{id}")
-    public User update(@PathVariable int id, @RequestBody User user) {
-        User userDatabase = this.repository.findById(id);
+    public void update(@PathVariable int id, @RequestBody User user) {
+        Optional<User> userDatabase = this.repository.findById(id);
                 //.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return this.repository.update(user);
     }
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
